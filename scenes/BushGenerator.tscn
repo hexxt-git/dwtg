@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bush_generator"]
+
+[ext_resource type="Script" path="res://scripts/bush_generator.gd" id="1_script"]
+
+[node name="BushGenerator" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="BushContainer" type="Node2D" parent="."] 

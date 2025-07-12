@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://ca63d0r3srjok"]
+
+[ext_resource type="PackedScene" path="res://scenes/GrassGenerator.tscn" id="1_cpr0p"]
+[ext_resource type="PackedScene" path="res://scenes/BushGenerator.tscn" id="2_78awf"]
+[ext_resource type="PackedScene" uid="uid://b6omo3pq6re60" path="res://scenes/Player.tscn" id="3_s0nni"]
+[ext_resource type="Texture2D" uid="uid://c5dcavvnsmnh0" path="res://assets/gun.png" id="4_78awf"]
+[ext_resource type="Script" uid="uid://cfqya24oucjrx" path="res://scripts/gun.gd" id="5_s0nni"]
+[ext_resource type="Script" uid="uid://brgcfurbf4ouf" path="res://scripts/enemy_spawner.gd" id="7_spawner"]
+[ext_resource type="PackedScene" uid="uid://dvdhpwt6s5ydi" path="res://scenes/HUD.tscn" id="8_hud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_top"]
+size = Vector2(5400, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_right"]
+size = Vector2(200, 5400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bottom"]
+size = Vector2(5400, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_left"]
+size = Vector2(200, 5400)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+offset_left = -4125.0
+offset_top = -4342.0
+offset_right = 3875.0
+offset_bottom = 3658.0
+color = Color(0.37111, 0.727134, 0.40899, 1)
+
+[node name="GrassGenerator" parent="." instance=ExtResource("1_cpr0p")]
+
+[node name="BushGenerator" parent="." instance=ExtResource("2_78awf")]
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("7_spawner")
+
+[node name="EnemyContainer" type="Node2D" parent="EnemySpawner"]
+
+[node name="SolidBorder" type="StaticBody2D" parent="."]
+
+[node name="TopWall" type="CollisionShape2D" parent="SolidBorder"]
+position = Vector2(0, -2600)
+shape = SubResource("RectangleShape2D_top")
+
+[node name="RightWall" type="CollisionShape2D" parent="SolidBorder"]
+position = Vector2(2600, 0)
+shape = SubResource("RectangleShape2D_right")
+
+[node name="BottomWall" type="CollisionShape2D" parent="SolidBorder"]
+position = Vector2(0, 2600)
+shape = SubResource("RectangleShape2D_bottom")
+
+[node name="LeftWall" type="CollisionShape2D" parent="SolidBorder"]
+position = Vector2(-2600, 0)
+shape = SubResource("RectangleShape2D_left")
+
+[node name="player" parent="." instance=ExtResource("3_s0nni")]
+position = Vector2(554, 412)
+
+[node name="Gun" type="Sprite2D" parent="player"]
+position = Vector2(-70, -14)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("4_78awf")
+offset = Vector2(0, 20)
+script = ExtResource("5_s0nni")
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("8_hud")]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://72lcaglruyhk"]
+
+[ext_resource type="Texture2D" uid="uid://baptlwsan4ti2" path="res://assets/amongi.png" id="1_enemy"]
+[ext_resource type="Script" uid="uid://krvhwcyjte6l" path="res://scripts/enemy.gd" id="2_enemy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_55jtl"]
+radius = 34.0
+height = 116.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("2_enemy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.71875, 0.71875)
+texture = ExtResource("1_enemy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_55jtl")

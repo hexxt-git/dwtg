@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6omo3pq6re60"]
+
+[ext_resource type="Texture2D" uid="uid://baptlwsan4ti2" path="res://assets/amongi.png" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://bm6b2io526qpv" path="res://scripts/player.gd" id="1_v6fml"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e2o6t"]
+radius = 47.0
+height = 114.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_v6fml")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_e2o6t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.614583, 0.614583)
+texture = ExtResource("1_p0vlq")
