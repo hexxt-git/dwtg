@@ -90,7 +90,7 @@ scale = Vector2(0.477344, 0.534722)
 texture = ExtResource("2_0ykhv")
 
 [node name="Amongi" type="Sprite2D" parent="."]
-position = Vector2(862, 500)
+position = Vector2(1454, 692)
 texture = ExtResource("3_2wh52")
 
 [node name="Amongi2" type="Sprite2D" parent="."]
@@ -99,6 +99,6 @@ scale = Vector2(-1, 1)
 texture = ExtResource("3_2wh52")
 
 [node name="Amongi3" type="Sprite2D" parent="."]
-position = Vector2(1036, 39)
+position = Vector2(1294, 35)
 scale = Vector2(1, -1)
 texture = ExtResource("3_2wh52")
