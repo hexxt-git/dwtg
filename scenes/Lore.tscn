@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh1bp7ol3g83k"]
+
+[ext_resource type="Script" uid="uid://c05ug8x04c6ml" path="res://scripts/lore.gd" id="1_lore_script"]
+
+[node name="Lore" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lore_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LoreText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 23
+theme_override_font_sizes/bold_font_size = 26
+bbcode_enabled = true
+text = "[center][b]THE LORE OF AMONGI GARDEN[/b][/center]
+
+[center]A tale of survival, growth, and the mysterious Amongi creatures...[/center]
+
+7kayet had le3ba sahla, bute dyalk tdkhal drahem wtsurvivi. 3ndak garden dyalek tlem fiha 'seeds' wl 'water' tkhdm bihom 'plants' t9der tb3ihom.
+
+bsah kayen mochkil fhad denya kayen daymen a3daa najah yhbo ydirok under the pressure wnta chikour 3ndak slah aya t9tolhom mtksarch rasek. 3ndak t9der tchri bullets ki ykhlasolk wbch techri upgrades roh a gauche kaml.
+
+a3daa najah hado kaynin partout 3es rohek (mnich nhdar 3la le3ba) w salam alikom."
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "BACK"
