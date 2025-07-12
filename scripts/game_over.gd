@@ -14,6 +14,9 @@ func _ready():
 	
 	# Display player stats
 	display_stats()
+	
+	# Auto-submit score after 1 seconds
+	get_tree().create_timer(1.0).timeout.connect(_auto_submit_score)
 
 func display_stats():
 	var final_stats = get_tree().get_meta("final_stats", null)
@@ -42,4 +45,49 @@ func _on_restart_button_pressed():
 
 func _on_main_menu_button_pressed():
 	# Go back to main menu
-	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn") 
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+
+func _auto_submit_score():
+	# Get player name from global settings
+	var player_name = get_node("/root/GameSettings").get_player_name()
+	if player_name == "":
+		return  # No name set, skip submission
+	
+	# Prepare game stats for leaderboard
+	var final_stats = get_tree().get_meta("final_stats", null)
+	if final_stats:
+		var game_stats = {
+			"player_name": player_name,
+			"money": final_stats.current_money,
+			"kills": final_stats.kills,
+			"play_time": int(final_stats.play_time),
+			"difficulty": int(final_stats.final_difficulty)
+		}
+		get_tree().set_meta("leaderboard_stats", game_stats)
+		
+		# Submit score automatically
+		submit_score_to_server(game_stats)
+
+func submit_score_to_server(game_stats: Dictionary):
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.request_completed.connect(_on_score_submitted)
+	
+	var data = {
+		"player_name": game_stats.player_name,
+		"score": game_stats.money,
+		"kills": game_stats.kills,
+		"play_time": game_stats.play_time,
+		"difficulty": game_stats.difficulty
+	}
+	
+	var json_string = JSON.stringify(data)
+	var headers = ["Content-Type: application/json"]
+	
+	http_request.request("http://localhost:3000/api/leaderboard", headers, HTTPClient.METHOD_POST, json_string)
+
+func _on_score_submitted(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
+	if response_code == 200:
+		print("Score submitted successfully!")
+	else:
+		print("Failed to submit score: ", response_code) 
