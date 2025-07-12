@@ -1,6 +1,6 @@
 extends Node2D
 
-const SPAWN_INTERVAL = 3  # Time between spawns
+const SPAWN_INTERVAL = 2.5  # Time between spawns
 const SPAWN_DISTANCE = 600.0  # Distance from player to spawn enemies
 const MAX_ENEMIES = 20  # Maximum number of enemies at once
 

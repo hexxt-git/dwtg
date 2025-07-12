@@ -7,14 +7,14 @@
 [ext_resource type="Script" uid="uid://cfqya24oucjrx" path="res://scripts/gun.gd" id="5_s0nni"]
 [ext_resource type="Script" uid="uid://brgcfurbf4ouf" path="res://scripts/enemy_spawner.gd" id="7_spawner"]
 [ext_resource type="PackedScene" uid="uid://dvdhpwt6s5ydi" path="res://scenes/HUD.tscn" id="8_hud"]
-[ext_resource type="PackedScene" path="res://scenes/SeedCollectionZone.tscn" id="9_seed_zone"]
-[ext_resource type="PackedScene" path="res://scenes/WaterCollectionZone.tscn" id="10_water_zone"]
-[ext_resource type="PackedScene" path="res://scenes/SellingZone.tscn" id="11_selling_zone"]
-[ext_resource type="PackedScene" path="res://scenes/PlantingZone.tscn" id="12_planting_zone"]
-[ext_resource type="PackedScene" path="res://scenes/BulletShopZone.tscn" id="13_bullet_shop"]
-[ext_resource type="PackedScene" path="res://scenes/FireRateUpgradeShop.tscn" id="14_fire_rate_upgrade"]
-[ext_resource type="PackedScene" path="res://scenes/DamageUpgradeShop.tscn" id="15_damage_upgrade"]
-[ext_resource type="PackedScene" path="res://scenes/SpeedUpgradeShop.tscn" id="16_speed_upgrade"]
+[ext_resource type="PackedScene" uid="uid://bkjrx7ch83vbe" path="res://scenes/SeedCollectionZone.tscn" id="9_seed_zone"]
+[ext_resource type="PackedScene" uid="uid://crvyop24681gj" path="res://scenes/WaterCollectionZone.tscn" id="10_water_zone"]
+[ext_resource type="PackedScene" uid="uid://fohj62c1shyy" path="res://scenes/SellingZone.tscn" id="11_selling_zone"]
+[ext_resource type="PackedScene" uid="uid://7cbtpll3mcst" path="res://scenes/PlantingZone.tscn" id="12_planting_zone"]
+[ext_resource type="PackedScene" uid="uid://digiuqqb86iwv" path="res://scenes/BulletShopZone.tscn" id="13_bullet_shop"]
+[ext_resource type="PackedScene" uid="uid://cpsok8h17dd31" path="res://scenes/FireRateUpgradeShop.tscn" id="14_fire_rate_upgrade"]
+[ext_resource type="PackedScene" uid="uid://bw5ubp8r5jjav" path="res://scenes/DamageUpgradeShop.tscn" id="15_damage_upgrade"]
+[ext_resource type="PackedScene" uid="uid://5i0070i3pog1" path="res://scenes/SpeedUpgradeShop.tscn" id="16_speed_upgrade"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_top"]
 size = Vector2(5400, 200)
@@ -41,11 +41,6 @@ color = Color(0.37111, 0.727134, 0.40899, 1)
 [node name="GrassGenerator" parent="." instance=ExtResource("1_cpr0p")]
 
 [node name="BushGenerator" parent="." instance=ExtResource("2_78awf")]
-
-[node name="EnemySpawner" type="Node2D" parent="."]
-script = ExtResource("7_spawner")
-
-[node name="EnemyContainer" type="Node2D" parent="EnemySpawner"]
 
 [node name="SolidBorder" type="StaticBody2D" parent="."]
 
@@ -94,7 +89,7 @@ position = Vector2(-1747, 189)
 position = Vector2(-1747, 397)
 
 [node name="SpeedUpgrade" parent="UpgradeShops" instance=ExtResource("16_speed_upgrade")]
-position = Vector2(-1747, 648)
+position = Vector2(-1747, 608)
 
 [node name="PlantingZones" type="Node2D" parent="."]
 
@@ -106,6 +101,11 @@ position = Vector2(1715, -604)
 
 [node name="PlantingZone3" parent="PlantingZones" instance=ExtResource("12_planting_zone")]
 position = Vector2(-29, -1115)
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("7_spawner")
+
+[node name="EnemyContainer" type="Node2D" parent="EnemySpawner"]
 
 [node name="player" parent="." instance=ExtResource("3_s0nni")]
 position = Vector2(554, 412)

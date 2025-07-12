@@ -12,7 +12,7 @@ func _on_start_button_pressed():
 
 func _on_exit_button_pressed():
 	# Exit the game
-	get_tree().quit()
+	get_tree().quit() 
 
 func _on_lore_button_pressed():
 	# Change to the lore scene

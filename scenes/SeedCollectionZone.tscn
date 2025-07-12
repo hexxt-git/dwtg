@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvn8x7y6z5w4v3"]
+[gd_scene load_steps=3 format=3 uid="uid://bvn8x7y6z5w4v3"]
 
 [ext_resource type="Script" path="res://scripts/resource_collector.gd" id="1_collector"]
+[ext_resource type="Texture2D" path="res://assets/seed.png" id="2_seed_texture"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_seed"]
 radius = 100.0
@@ -14,12 +15,8 @@ max_capacity = 50
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_seed")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
-color = Color(0.8, 0.6, 0.2, 0.3)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_seed_texture")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -50.0
