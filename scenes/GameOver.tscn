@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cr9x0y1z2a3b4c5"]
+[gd_scene load_steps=2 format=3 uid="uid://dplqeht6kbmja"]
 
-[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_game_over_script"]
+[ext_resource type="Script" uid="uid://c8f86p4if845a" path="res://scripts/game_over.gd" id="1_game_over_script"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_game_over_script")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -14,6 +16,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.3, 0.1, 0.1, 0.8)
 
 [node name="GameOverLabel" type="Label" parent="."]
@@ -24,14 +28,58 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = -150.0
+offset_top = -200.0
 offset_right = 200.0
-offset_bottom = -100.0
+offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StatsContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MoneyLabel" type="Label" parent="StatsContainer"]
+layout_mode = 2
+text = "Money Earned: $0"
+horizontal_alignment = 1
+
+[node name="PlantsLabel" type="Label" parent="StatsContainer"]
+layout_mode = 2
+text = "Plants Grown: 0"
+horizontal_alignment = 1
+
+[node name="BulletsLabel" type="Label" parent="StatsContainer"]
+layout_mode = 2
+text = "Bullets Remaining: 0"
+horizontal_alignment = 1
+
+[node name="SeedsLabel" type="Label" parent="StatsContainer"]
+layout_mode = 2
+text = "Seeds Collected: 0"
+horizontal_alignment = 1
+
+[node name="WaterLabel" type="Label" parent="StatsContainer"]
+layout_mode = 2
+text = "Water Collected: 0"
+horizontal_alignment = 1
+
+[node name="TotalValueLabel" type="Label" parent="StatsContainer"]
+layout_mode = 2
+text = "Total Value (Score): $0"
+horizontal_alignment = 1
 
 [node name="RestartButton" type="Button" parent="."]
 layout_mode = 1
@@ -41,9 +89,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -25.0
+offset_top = 104.0
 offset_right = 100.0
-offset_bottom = 25.0
+offset_bottom = 154.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "RESTART"
@@ -56,9 +104,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = 50.0
+offset_top = 171.0
 offset_right = 100.0
-offset_bottom = 100.0
+offset_bottom = 221.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "MAIN MENU" 
+text = "MAIN MENU"

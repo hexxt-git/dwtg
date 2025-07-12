@@ -64,6 +64,11 @@ func get_resting_position() -> Vector2:
 		return RESTING_POSITION_LEFT
 
 func handle_shooting(delta: float, target_angle: float, mouse_pos: Vector2	):
+	# Check if player has bullets
+	var player = get_parent()
+	if not player or not player.has_method("can_shoot") or not player.can_shoot():
+		return  # Can't shoot without bullets
+	
 	# Update shoot timer
 	if not can_shoot:
 		shoot_timer += delta
@@ -81,7 +86,7 @@ func handle_shooting(delta: float, target_angle: float, mouse_pos: Vector2	):
 	var mouse_just_pressed = mouse_is_pressed and not mouse_was_pressed
 	
 	# Handle shooting
-	if Input.is_action_just_pressed("ui_accept") or mouse_just_pressed:
+	if mouse_just_pressed:
 		if can_shoot:
 			# Can shoot immediately
 			shoot_bullet(target_angle, mouse_pos)
@@ -103,6 +108,11 @@ func handle_shooting(delta: float, target_angle: float, mouse_pos: Vector2	):
 	mouse_was_pressed = mouse_is_pressed
 
 func shoot_bullet(target_angle: float, mouse_pos: Vector2):
+	# Check if player can use a bullet
+	var player = get_parent()
+	if not player or not player.has_method("use_bullet") or not player.use_bullet():
+		return  # Can't shoot without bullets
+	
 	# Calculate bullet spawn position from the gun tip
 	var bullet_spawn_pos = global_position + Vector2(cos(target_angle), sin(target_angle)) * 50
 	

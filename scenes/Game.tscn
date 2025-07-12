@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ca63d0r3srjok"]
+[gd_scene load_steps=17 format=3 uid="uid://ca63d0r3srjok"]
 
 [ext_resource type="PackedScene" path="res://scenes/GrassGenerator.tscn" id="1_cpr0p"]
 [ext_resource type="PackedScene" path="res://scenes/BushGenerator.tscn" id="2_78awf"]
@@ -7,6 +7,11 @@
 [ext_resource type="Script" uid="uid://cfqya24oucjrx" path="res://scripts/gun.gd" id="5_s0nni"]
 [ext_resource type="Script" uid="uid://brgcfurbf4ouf" path="res://scripts/enemy_spawner.gd" id="7_spawner"]
 [ext_resource type="PackedScene" uid="uid://dvdhpwt6s5ydi" path="res://scenes/HUD.tscn" id="8_hud"]
+[ext_resource type="PackedScene" path="res://scenes/SeedCollectionZone.tscn" id="9_seed_zone"]
+[ext_resource type="PackedScene" path="res://scenes/WaterCollectionZone.tscn" id="10_water_zone"]
+[ext_resource type="PackedScene" path="res://scenes/SellingZone.tscn" id="11_selling_zone"]
+[ext_resource type="PackedScene" path="res://scenes/PlantingZone.tscn" id="12_planting_zone"]
+[ext_resource type="PackedScene" path="res://scenes/BulletShopZone.tscn" id="13_bullet_shop"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_top"]
 size = Vector2(5400, 200)
@@ -56,6 +61,37 @@ shape = SubResource("RectangleShape2D_bottom")
 [node name="LeftWall" type="CollisionShape2D" parent="SolidBorder"]
 position = Vector2(-2600, 0)
 shape = SubResource("RectangleShape2D_left")
+
+[node name="ResourceZones" type="Node2D" parent="."]
+
+[node name="SeedZone1" parent="ResourceZones" instance=ExtResource("9_seed_zone")]
+position = Vector2(-887, -175)
+
+[node name="SeedZone2" parent="ResourceZones" instance=ExtResource("9_seed_zone")]
+position = Vector2(1507, 1087)
+
+[node name="WaterZone1" parent="ResourceZones" instance=ExtResource("10_water_zone")]
+position = Vector2(-1012, 1184)
+
+[node name="WaterZone2" parent="ResourceZones" instance=ExtResource("10_water_zone")]
+position = Vector2(1007, -930)
+
+[node name="SellingZone" parent="ResourceZones" instance=ExtResource("11_selling_zone")]
+position = Vector2(346, 448)
+
+[node name="BulletShopZone" parent="ResourceZones" instance=ExtResource("13_bullet_shop")]
+position = Vector2(80, 447)
+
+[node name="PlantingZones" type="Node2D" parent="."]
+
+[node name="PlantingZone1" parent="PlantingZones" instance=ExtResource("12_planting_zone")]
+position = Vector2(-1331, -826)
+
+[node name="PlantingZone2" parent="PlantingZones" instance=ExtResource("12_planting_zone")]
+position = Vector2(1334, -471)
+
+[node name="PlantingZone3" parent="PlantingZones" instance=ExtResource("12_planting_zone")]
+position = Vector2(127, -575)
 
 [node name="player" parent="." instance=ExtResource("3_s0nni")]
 position = Vector2(554, 412)

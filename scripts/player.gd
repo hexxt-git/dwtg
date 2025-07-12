@@ -22,6 +22,27 @@ var current_hp = MAX_HP
 var is_invincible = false
 var invincibility_timer = 0.0
 
+# Resource variables
+var seeds = 0
+var water = 0
+const MAX_SEEDS = 100
+const MAX_WATER = 100
+
+# Money and plants
+var money = 0
+var plants = 0
+
+# Bullets
+var bullets = 50
+const MAX_BULLETS = 100
+
+# Statistics tracking
+var total_money_earned = 0
+var total_plants_grown = 0
+var total_bullets_used = 0
+var total_seeds_collected = 0
+var total_water_collected = 0
+
 func _ready():
 	# Store the original Y position of the sprite for bobbing
 	original_sprite_y = sprite.position.y
@@ -142,8 +163,89 @@ func knockback_nearby_enemies():
 			if enemy.has_method("apply_knockback"):
 				enemy.apply_knockback(knockback_direction, KNOCKBACK_FORCE)
 
+func add_resource(resource_type: String, amount: int):
+	match resource_type:
+		"seed":
+			seeds = max(0, min(seeds + amount, MAX_SEEDS))
+			if amount > 0:
+				total_seeds_collected += amount
+			print("Added ", amount, " seeds. Total: ", seeds)
+		"water":
+			water = max(0, min(water + amount, MAX_WATER))
+			if amount > 0:
+				total_water_collected += amount
+			print("Added ", amount, " water. Total: ", water)
+		"plant":
+			plants = max(0, plants + amount)
+			if amount > 0:
+				total_plants_grown += amount
+			print("Added ", amount, " plants. Total: ", plants)
+		"money":
+			money = max(0, money + amount)
+			if amount > 0:
+				total_money_earned += amount
+			print("Added ", amount, " money. Total: ", money)
+		"bullet":
+			bullets = max(0, min(bullets + amount, MAX_BULLETS))
+			print("Added ", amount, " bullets. Total: ", bullets)
+
+func get_resource(resource_type: String) -> int:
+	match resource_type:
+		"seed":
+			return seeds
+		"water":
+			return water
+		"plant":
+			return plants
+		"money":
+			return money
+		"bullet":
+			return bullets
+		_:
+			return 0
+
+func can_shoot() -> bool:
+	return bullets > 0
+
+func use_bullet():
+	if bullets > 0:
+		bullets -= 1
+		total_bullets_used += 1
+		print("Used 1 bullet. Remaining: ", bullets)
+		return true
+	return false
+
+func get_max_resource(resource_type: String) -> int:
+	match resource_type:
+		"seed":
+			return MAX_SEEDS
+		"water":
+			return MAX_WATER
+		_:
+			return 0
+
+
+
 func die():
 	print("Player died!")
+	
+	# Store final stats before scene change
+	var final_stats = {
+		"total_money_earned": total_money_earned,
+		"total_plants_grown": total_plants_grown,
+		"total_bullets_used": total_bullets_used,
+		"total_seeds_collected": total_seeds_collected,
+		"total_water_collected": total_water_collected,
+		"current_money": money,
+		"current_plants": plants,
+		"current_seeds": seeds,
+		"current_water": water,
+		"current_bullets": bullets
+	}
+	
+	# Store stats in autoload or global variable
+	get_tree().set_meta("final_stats", final_stats)
+	
 	set_process(false)
 	set_physics_process(false)
 	get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
