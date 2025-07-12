@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw5ubp8r5jjav"]
+
+[ext_resource type="Script" path="res://scripts/upgrade_shop.gd" id="1_upgrade_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_damage"]
+radius = 80.0
+
+[node name="DamageUpgradeShop" type="Area2D"]
+script = ExtResource("1_upgrade_script")
+upgrade_type = "damage"
+upgrade_cost = 200
+upgrade_value = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_damage")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 80.0
+color = Color(0.6, 0.2, 0.8, 0.3)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -60.0
+offset_top = -100.0
+offset_right = 60.0
+offset_bottom = -80.0
+text = "Damage Upgrade
+Cost: $200
+Press E"
+horizontal_alignment = 1
+vertical_alignment = 1 

@@ -187,3 +187,31 @@ grow_vertical = 2
 text = "Bullets: 0/100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TimerLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 100.0
+offset_right = -20.0
+offset_bottom = 130.0
+grow_horizontal = 0
+text = "Time: 00:00"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="KillsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 140.0
+offset_right = -20.0
+offset_bottom = 170.0
+grow_horizontal = 0
+text = "Kills: 0"
+horizontal_alignment = 2
+vertical_alignment = 1

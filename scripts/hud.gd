@@ -13,6 +13,8 @@ extends Control
 @onready var bullet_bar = $BulletBar
 @onready var bullet_fill = $BulletBar/Fill
 @onready var bullet_label = $BulletBar/Label
+@onready var timer_label = $TimerLabel
+@onready var kills_label = $KillsLabel
 @onready var player = get_tree().get_first_node_in_group("player")
 
 func _ready():
@@ -43,3 +45,9 @@ func _process(_delta):
 		var bullet_percentage = float(player.bullets) / float(player.MAX_BULLETS)
 		bullet_fill.size.x = bullet_bar.size.x * bullet_percentage
 		bullet_label.text = "Bullets: " + str(player.bullets) + "/" + str(player.MAX_BULLETS)
+		
+		# Update timer and kills
+		var minutes = int(player.play_time) / 60
+		var seconds = int(player.play_time) % 60
+		timer_label.text = "Time: %02d:%02d" % [minutes, seconds]
+		kills_label.text = "Kills: " + str(player.kills)

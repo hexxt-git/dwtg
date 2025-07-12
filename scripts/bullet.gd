@@ -26,7 +26,11 @@ func initialize(start_position: Vector2, direction: Vector2):
 func _on_body_entered(body):
 	# Handle collision with other bodies
 	if body.has_method("take_damage"):
-		body.take_damage(5, velocity)  # Pass damage amount and bullet direction
+		var base_damage = 5
+		var player = get_tree().get_first_node_in_group("player")
+		if player and player.has_method("get_damage_bonus"):
+			base_damage += player.get_damage_bonus()
+		body.take_damage(base_damage, velocity)  # Pass damage amount and bullet direction
 	
 	# Destroy the bullet on collision
 	queue_free() 

@@ -14,6 +14,7 @@ var bullet_scene = preload("res://scenes/Bullet.tscn")
 # Shooting variables
 var can_shoot = true
 var shoot_cooldown = 0.333  # Time between shots
+var base_cooldown = 0.333  # Base cooldown for calculations
 var shoot_timer = 0.0
 var mouse_was_pressed = false
 var shot_queued = false  # Track if a shot was requested during cooldown
@@ -106,6 +107,10 @@ func handle_shooting(delta: float, target_angle: float, mouse_pos: Vector2	):
 	
 	# Update mouse state for next frame
 	mouse_was_pressed = mouse_is_pressed
+
+func update_fire_rate(multiplier: float):
+	shoot_cooldown = base_cooldown / multiplier
+	print("Fire rate updated! New cooldown: ", shoot_cooldown)
 
 func shoot_bullet(target_angle: float, mouse_pos: Vector2):
 	# Check if player can use a bullet

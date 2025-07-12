@@ -56,29 +56,19 @@ layout_mode = 2
 text = "Money Earned: $0"
 horizontal_alignment = 1
 
-[node name="PlantsLabel" type="Label" parent="StatsContainer"]
-layout_mode = 2
-text = "Plants Grown: 0"
-horizontal_alignment = 1
-
 [node name="BulletsLabel" type="Label" parent="StatsContainer"]
 layout_mode = 2
-text = "Bullets Remaining: 0"
+text = "Bullets Used: 0"
 horizontal_alignment = 1
 
-[node name="SeedsLabel" type="Label" parent="StatsContainer"]
+[node name="TimerLabel" type="Label" parent="StatsContainer"]
 layout_mode = 2
-text = "Seeds Collected: 0"
+text = "Play Time: 00:00"
 horizontal_alignment = 1
 
-[node name="WaterLabel" type="Label" parent="StatsContainer"]
+[node name="KillsLabel" type="Label" parent="StatsContainer"]
 layout_mode = 2
-text = "Water Collected: 0"
-horizontal_alignment = 1
-
-[node name="TotalValueLabel" type="Label" parent="StatsContainer"]
-layout_mode = 2
-text = "Total Value (Score): $0"
+text = "Kills: 0"
 horizontal_alignment = 1
 
 [node name="RestartButton" type="Button" parent="."]

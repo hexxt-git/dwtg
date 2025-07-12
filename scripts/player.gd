@@ -23,13 +23,13 @@ var is_invincible = false
 var invincibility_timer = 0.0
 
 # Resource variables
-var seeds = 0
-var water = 0
+var seeds = 5
+var water = 5
 const MAX_SEEDS = 100
 const MAX_WATER = 100
 
 # Money and plants
-var money = 0
+var money = 50
 var plants = 0
 
 # Bullets
@@ -38,10 +38,18 @@ const MAX_BULLETS = 100
 
 # Statistics tracking
 var total_money_earned = 0
-var total_plants_grown = 0
 var total_bullets_used = 0
 var total_seeds_collected = 0
 var total_water_collected = 0
+
+# Timer and kill tracking
+var play_time = 0.0
+var kills = 0
+
+# Upgrade system
+var fire_rate_multiplier = 1.0
+var damage_bonus = 0
+var speed_multiplier = 1.0
 
 func _ready():
 	# Store the original Y position of the sprite for bobbing
@@ -84,8 +92,8 @@ func _physics_process(delta: float) -> void:
 	# Apply visual flip to sprite
 	sprite.flip_h = visual_flip
 	
-	# Apply movement
-	velocity = input_vector * SPEED
+	# Apply movement with speed multiplier
+	velocity = input_vector * SPEED * speed_multiplier
 	move_and_slide()
 	
 	# Check for enemy collisions
@@ -113,6 +121,9 @@ func _physics_process(delta: float) -> void:
 		# Reset sprite position when not moving
 		sprite.position.y = original_sprite_y
 		time_passed = 0.0
+	
+	# Update play time
+	play_time += delta
 
 func check_enemy_collisions():
 	# Only check for collisions if not invincible
@@ -177,8 +188,6 @@ func add_resource(resource_type: String, amount: int):
 			print("Added ", amount, " water. Total: ", water)
 		"plant":
 			plants = max(0, plants + amount)
-			if amount > 0:
-				total_plants_grown += amount
 			print("Added ", amount, " plants. Total: ", plants)
 		"money":
 			money = max(0, money + amount)
@@ -215,6 +224,37 @@ func use_bullet():
 		return true
 	return false
 
+func purchase_upgrade(upgrade_type: String, value: float, cost: int) -> bool:
+	if money < cost:
+		return false
+	
+	match upgrade_type:
+		"fire_rate":
+			fire_rate_multiplier += value
+			print("Fire rate upgraded! New multiplier: ", fire_rate_multiplier)
+		"damage":
+			damage_bonus += int(value)
+			print("Damage upgraded! New bonus: ", damage_bonus)
+		"speed":
+			speed_multiplier += value
+			print("Speed upgraded! New multiplier: ", speed_multiplier)
+		_:
+			print("Unknown upgrade type: ", upgrade_type)
+			return false
+	
+	# Consume money
+	add_resource("money", -cost)
+	
+	# Update gun if it exists
+	var gun = get_node_or_null("Gun")
+	if gun and gun.has_method("update_fire_rate"):
+		gun.update_fire_rate(fire_rate_multiplier)
+	
+	return true
+
+func get_damage_bonus() -> int:
+	return damage_bonus
+
 func get_max_resource(resource_type: String) -> int:
 	match resource_type:
 		"seed":
@@ -224,6 +264,10 @@ func get_max_resource(resource_type: String) -> int:
 		_:
 			return 0
 
+func add_kill():
+	kills += 1
+	print("Kill added! Total kills: ", kills)
+
 
 
 func die():
@@ -231,16 +275,13 @@ func die():
 	
 	# Store final stats before scene change
 	var final_stats = {
-		"total_money_earned": total_money_earned,
-		"total_plants_grown": total_plants_grown,
-		"total_bullets_used": total_bullets_used,
-		"total_seeds_collected": total_seeds_collected,
-		"total_water_collected": total_water_collected,
 		"current_money": money,
 		"current_plants": plants,
 		"current_seeds": seeds,
 		"current_water": water,
-		"current_bullets": bullets
+		"current_bullets": bullets,
+		"kills": kills,
+		"play_time": play_time
 	}
 	
 	# Store stats in autoload or global variable

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ca63d0r3srjok"]
+[gd_scene load_steps=20 format=3 uid="uid://ca63d0r3srjok"]
 
 [ext_resource type="PackedScene" path="res://scenes/GrassGenerator.tscn" id="1_cpr0p"]
 [ext_resource type="PackedScene" path="res://scenes/BushGenerator.tscn" id="2_78awf"]
@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" path="res://scenes/SellingZone.tscn" id="11_selling_zone"]
 [ext_resource type="PackedScene" path="res://scenes/PlantingZone.tscn" id="12_planting_zone"]
 [ext_resource type="PackedScene" path="res://scenes/BulletShopZone.tscn" id="13_bullet_shop"]
+[ext_resource type="PackedScene" path="res://scenes/FireRateUpgradeShop.tscn" id="14_fire_rate_upgrade"]
+[ext_resource type="PackedScene" path="res://scenes/DamageUpgradeShop.tscn" id="15_damage_upgrade"]
+[ext_resource type="PackedScene" path="res://scenes/SpeedUpgradeShop.tscn" id="16_speed_upgrade"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_top"]
 size = Vector2(5400, 200)
@@ -65,16 +68,16 @@ shape = SubResource("RectangleShape2D_left")
 [node name="ResourceZones" type="Node2D" parent="."]
 
 [node name="SeedZone1" parent="ResourceZones" instance=ExtResource("9_seed_zone")]
-position = Vector2(-887, -175)
+position = Vector2(-1039, -283)
 
 [node name="SeedZone2" parent="ResourceZones" instance=ExtResource("9_seed_zone")]
-position = Vector2(1507, 1087)
+position = Vector2(1618, 1057)
 
 [node name="WaterZone1" parent="ResourceZones" instance=ExtResource("10_water_zone")]
-position = Vector2(-1012, 1184)
+position = Vector2(-882, 1502)
 
 [node name="WaterZone2" parent="ResourceZones" instance=ExtResource("10_water_zone")]
-position = Vector2(1007, -930)
+position = Vector2(1159, -1152)
 
 [node name="SellingZone" parent="ResourceZones" instance=ExtResource("11_selling_zone")]
 position = Vector2(346, 448)
@@ -82,16 +85,27 @@ position = Vector2(346, 448)
 [node name="BulletShopZone" parent="ResourceZones" instance=ExtResource("13_bullet_shop")]
 position = Vector2(80, 447)
 
+[node name="UpgradeShops" type="Node2D" parent="."]
+
+[node name="FireRateUpgrade" parent="UpgradeShops" instance=ExtResource("14_fire_rate_upgrade")]
+position = Vector2(-1747, 189)
+
+[node name="DamageUpgrade" parent="UpgradeShops" instance=ExtResource("15_damage_upgrade")]
+position = Vector2(-1747, 397)
+
+[node name="SpeedUpgrade" parent="UpgradeShops" instance=ExtResource("16_speed_upgrade")]
+position = Vector2(-1747, 648)
+
 [node name="PlantingZones" type="Node2D" parent="."]
 
 [node name="PlantingZone1" parent="PlantingZones" instance=ExtResource("12_planting_zone")]
 position = Vector2(-1331, -826)
 
 [node name="PlantingZone2" parent="PlantingZones" instance=ExtResource("12_planting_zone")]
-position = Vector2(1334, -471)
+position = Vector2(1715, -604)
 
 [node name="PlantingZone3" parent="PlantingZones" instance=ExtResource("12_planting_zone")]
-position = Vector2(127, -575)
+position = Vector2(-29, -1115)
 
 [node name="player" parent="." instance=ExtResource("3_s0nni")]
 position = Vector2(554, 412)

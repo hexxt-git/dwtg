@@ -121,4 +121,7 @@ func apply_knockback(direction: Vector2, force: float):
 
 func die():
 	print("Enemy died!")
+	# Add kill to player stats
+	if player and player.has_method("add_kill"):
+		player.add_kill()
 	queue_free() 
