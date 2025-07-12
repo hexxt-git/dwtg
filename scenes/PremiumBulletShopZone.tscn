@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://digiuqqb86iwv"]
+[gd_scene load_steps=3 format=3 uid="uid://premium_bullet_shop"]
 
 [ext_resource type="Script" path="res://scripts/resource_collector.gd" id="1_bullet_shop_script"]
 [ext_resource type="Texture2D" path="res://assets/bullets.png" id="2_bullets_texture"]
@@ -6,17 +6,17 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_bullet_shop"]
 radius = 80.0
 
-[node name="BulletShopZone" type="Area2D"]
+[node name="PremiumBulletShopZone" type="Area2D"]
 script = ExtResource("1_bullet_shop_script")
 resource_type = "bullet"
-collection_rate = 5.0
+collection_rate = 30.0
 collection_interval = 1.0
 requires_seeds = 0
 requires_water = 0
 requires_plants = 0
 requires_rocks = 0
 requires_iron = 0
-requires_money = 5
+requires_money = 60
 is_multi_recipe = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -24,6 +24,7 @@ shape = SubResource("CircleShape2D_bullet_shop")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_bullets_texture")
+modulate = Color(1.2, 1.2, 0.8, 1.0)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -60.0

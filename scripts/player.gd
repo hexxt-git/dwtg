@@ -23,28 +23,40 @@ var is_invincible = false
 var invincibility_timer = 0.0
 
 # Resource variables
-var seeds = 5
-var water = 5
+var seeds = 0
+var water = 0
 const MAX_SEEDS = 100
 const MAX_WATER = 100
 
 # Money and plants
-var money = 50
+var money = 0
 var plants = 0
+
+# Rocks and iron
+var rocks = 0
+var iron = 0
+const MAX_ROCKS = 50
+const MAX_IRON = 20
 
 # Bullets
 var bullets = 50
-const MAX_BULLETS = 100
+const MAX_BULLETS = 200
 
 # Statistics tracking
 var total_money_earned = 0
 var total_bullets_used = 0
 var total_seeds_collected = 0
 var total_water_collected = 0
+var total_rocks_collected = 0
+var total_iron_collected = 0
 
 # Timer and kill tracking
 var play_time = 0.0
 var kills = 0
+
+# Difficulty system
+var difficulty = 0.0
+const DIFFICULTY_INCREMENT = 0.1  # Increase by 0.1 each second
 
 # Upgrade system
 var fire_rate_multiplier = 1.0
@@ -124,6 +136,9 @@ func _physics_process(delta: float) -> void:
 	
 	# Update play time
 	play_time += delta
+	
+	# Update difficulty
+	difficulty += DIFFICULTY_INCREMENT * delta
 
 func check_enemy_collisions():
 	# Only check for collisions if not invincible
@@ -194,6 +209,16 @@ func add_resource(resource_type: String, amount: int):
 			if amount > 0:
 				total_money_earned += amount
 			print("Added ", amount, " money. Total: ", money)
+		"rock":
+			rocks = max(0, min(rocks + amount, MAX_ROCKS))
+			if amount > 0:
+				total_rocks_collected += amount
+			print("Added ", amount, " rocks. Total: ", rocks)
+		"iron":
+			iron = max(0, min(iron + amount, MAX_IRON))
+			if amount > 0:
+				total_iron_collected += amount
+			print("Added ", amount, " iron. Total: ", iron)
 		"bullet":
 			bullets = max(0, min(bullets + amount, MAX_BULLETS))
 			print("Added ", amount, " bullets. Total: ", bullets)
@@ -208,6 +233,10 @@ func get_resource(resource_type: String) -> int:
 			return plants
 		"money":
 			return money
+		"rock":
+			return rocks
+		"iron":
+			return iron
 		"bullet":
 			return bullets
 		_:
@@ -261,12 +290,19 @@ func get_max_resource(resource_type: String) -> int:
 			return MAX_SEEDS
 		"water":
 			return MAX_WATER
+		"rock":
+			return MAX_ROCKS
+		"iron":
+			return MAX_IRON
 		_:
 			return 0
 
 func add_kill():
 	kills += 1
 	print("Kill added! Total kills: ", kills)
+
+func get_difficulty() -> float:
+	return difficulty
 
 
 
@@ -279,9 +315,12 @@ func die():
 		"current_plants": plants,
 		"current_seeds": seeds,
 		"current_water": water,
+		"current_rocks": rocks,
+		"current_iron": iron,
 		"current_bullets": bullets,
 		"kills": kills,
-		"play_time": play_time
+		"play_time": play_time,
+		"final_difficulty": difficulty
 	}
 	
 	# Store stats in autoload or global variable

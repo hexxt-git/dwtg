@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cesxxutsf7ao"]
+
+[ext_resource type="Script" uid="uid://hb10cuyqpk4n" path="res://scripts/resource_collector.gd" id="1_collector"]
+[ext_resource type="Texture2D" uid="uid://cdht171clomrc" path="res://assets/furnace.png" id="2_furnace_texture"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_furnace"]
+radius = 100.0
+
+[node name="FurnaceZone" type="Area2D"]
+script = ExtResource("1_collector")
+resource_type = "iron"
+collection_interval = 10.0
+requires_rocks = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_furnace")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.627451)
+texture = ExtResource("2_furnace_texture")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -60.0
+offset_top = -120.0
+offset_right = 60.0
+offset_bottom = -100.0
+horizontal_alignment = 1
+vertical_alignment = 1

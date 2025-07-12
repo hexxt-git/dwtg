@@ -8,6 +8,10 @@ extends Control
 @onready var water_bar = $WaterBar
 @onready var water_fill = $WaterBar/Fill
 @onready var water_label = $WaterBar/Label
+@onready var rock_bar = $RockBar
+@onready var rock_fill = $RockBar/Fill
+@onready var rock_label = $RockBar/Label
+@onready var iron_label = $IronLabel
 @onready var money_label = $MoneyLabel
 @onready var plants_label = $PlantsLabel
 @onready var bullet_bar = $BulletBar
@@ -15,6 +19,7 @@ extends Control
 @onready var bullet_label = $BulletBar/Label
 @onready var timer_label = $TimerLabel
 @onready var kills_label = $KillsLabel
+@onready var difficulty_label = $DifficultyLabel
 @onready var player = get_tree().get_first_node_in_group("player")
 
 func _ready():
@@ -37,6 +42,14 @@ func _process(_delta):
 		water_fill.size.x = water_bar.size.x * water_percentage
 		water_label.text = "Water: " + str(player.water) + "/" + str(player.MAX_WATER)
 		
+		# Update rock bar
+		var rock_percentage = float(player.rocks) / float(player.MAX_ROCKS)
+		rock_fill.size.x = rock_bar.size.x * rock_percentage
+		rock_label.text = "Rocks: " + str(player.rocks) + "/" + str(player.MAX_ROCKS)
+		
+		# Update iron label
+		iron_label.text = "Iron: " + str(player.iron)
+		
 		# Update money and plants
 		money_label.text = "Money: $" + str(player.money)
 		plants_label.text = "Plants: " + str(player.plants)
@@ -51,3 +64,6 @@ func _process(_delta):
 		var seconds = int(player.play_time) % 60
 		timer_label.text = "Time: %02d:%02d" % [minutes, seconds]
 		kills_label.text = "Kills: " + str(player.kills)
+		
+		# Update difficulty
+		difficulty_label.text = "Difficulty: %.1f" % player.difficulty

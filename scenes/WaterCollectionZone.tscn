@@ -10,7 +10,7 @@ radius = 100.0
 script = ExtResource("1_collector")
 resource_type = "water"
 collection_rate = 1.0
-max_capacity = 75
+collection_interval = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_water")
@@ -23,6 +23,5 @@ offset_left = -50.0
 offset_top = -120.0
 offset_right = 50.0
 offset_bottom = -100.0
-text = "Water Zone"
 horizontal_alignment = 1
 vertical_alignment = 1 

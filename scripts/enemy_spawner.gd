@@ -1,6 +1,7 @@
 extends Node2D
 
-const SPAWN_INTERVAL = 2.5  # Time between spawns
+const BASE_SPAWN_INTERVAL = 4.0  # Time between spawns at difficulty 0
+const MIN_SPAWN_INTERVAL = 0.1  # Minimum time between spawns (10 per second at difficulty 100)
 const SPAWN_DISTANCE = 600.0  # Distance from player to spawn enemies
 const MAX_ENEMIES = 20  # Maximum number of enemies at once
 
@@ -21,17 +22,33 @@ func _process(delta):
 		print('no player')
 		return
 	
+	# Get current difficulty from player
+	var difficulty = 0.0
+	if player.has_method("get_difficulty"):
+		difficulty = player.get_difficulty()
+	
+	# Calculate spawn interval based on difficulty
+	var spawn_interval = calculate_spawn_interval(difficulty)
+	
 	# Update spawn timer
 	spawn_timer += delta
 	
 	# Check if we should spawn an enemy
-	if spawn_timer >= SPAWN_INTERVAL:
+	if spawn_timer >= spawn_interval:
 		# Check if we haven't reached max enemies
 		var current_enemy_count = enemy_container.get_child_count()
 		if current_enemy_count < MAX_ENEMIES:
 			spawn_enemy()
 		
 		spawn_timer = 0.0
+
+func calculate_spawn_interval(difficulty: float) -> float:
+	# Linear interpolation from BASE_SPAWN_INTERVAL to MIN_SPAWN_INTERVAL
+	# At difficulty 0: BASE_SPAWN_INTERVAL (4.0 seconds)
+	# At difficulty 100: MIN_SPAWN_INTERVAL (0.1 seconds = 10 per second)
+	# you reach 100 at 1000 seconds (16.666666666666668 minutes)
+	var t = min(difficulty / 100.0, 1.0)  # Clamp to 0-1 range
+	return lerp(BASE_SPAWN_INTERVAL, MIN_SPAWN_INTERVAL, t)
 
 func spawn_enemy():
 	# Get random angle around the player

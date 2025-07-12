@@ -40,6 +40,10 @@ func set_resource_type(resource_type: String, amount: int, is_positive: bool):
 			color = Color(0.2, 0.4, 0.8)  # Blue
 		"plant":
 			color = Color(0.2, 0.8, 0.2)  # Green
+		"rock":
+			color = Color(0.6, 0.6, 0.6)  # Gray
+		"iron":
+			color = Color(0.4, 0.4, 0.4)  # Dark Gray
 		"money":
 			color = Color(0.8, 0.8, 0.2)  # Yellow
 		"bullet":

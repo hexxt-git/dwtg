@@ -27,7 +27,5 @@ offset_left = -60.0
 offset_top = -100.0
 offset_right = 60.0
 offset_bottom = -80.0
-text = "Selling Zone
-(Press SPACE)"
 horizontal_alignment = 1
 vertical_alignment = 1 

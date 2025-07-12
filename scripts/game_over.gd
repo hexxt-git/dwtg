@@ -5,6 +5,7 @@ extends Control
 @onready var bullets_label = $StatsContainer/BulletsLabel
 @onready var timer_label = $StatsContainer/TimerLabel
 @onready var kills_label = $StatsContainer/KillsLabel
+@onready var difficulty_label = $StatsContainer/DifficultyLabel
 
 func _ready():
 	# Connect button signals
@@ -25,6 +26,7 @@ func display_stats():
 		var seconds = int(final_stats.play_time) % 60
 		timer_label.text = "Play Time: %02d:%02d" % [minutes, seconds]
 		kills_label.text = "Kills: " + str(final_stats.kills)
+		difficulty_label.text = "Final Difficulty: %.1f" % final_stats.final_difficulty
 		
 	else:
 		# Fallback if stats not found
@@ -32,6 +34,7 @@ func display_stats():
 		bullets_label.text = "Bullets Used: 0"
 		timer_label.text = "Play Time: 00:00"
 		kills_label.text = "Kills: 0"
+		difficulty_label.text = "Final Difficulty: 0.0"
 
 func _on_restart_button_pressed():
 	# Restart the game by changing to the game scene

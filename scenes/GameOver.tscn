@@ -71,6 +71,11 @@ layout_mode = 2
 text = "Kills: 0"
 horizontal_alignment = 1
 
+[node name="DifficultyLabel" type="Label" parent="StatsContainer"]
+layout_mode = 2
+text = "Final Difficulty: 0.0"
+horizontal_alignment = 1
+
 [node name="RestartButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
