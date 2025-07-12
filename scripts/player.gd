@@ -11,6 +11,7 @@ const KNOCKBACK_FORCE = 800.0
 const INVINCIBILITY_DURATION = 3.0
 
 @onready var sprite = $Sprite2D
+@onready var name_label = $NameLabel
 var time_passed = 0.0
 var original_sprite_y = 0.0
 var vertical_flip_timer = 0.0
@@ -73,6 +74,13 @@ func _ready():
 	# Set collision layers for enemy detection
 	collision_layer = 1
 	collision_mask = 4  # Collide with enemies (layer 4)
+	
+	# Set player name from global settings
+	var player_name = get_node("/root/GameSettings").get_player_name()
+	if player_name != "":
+		name_label.text = player_name
+	else:
+		name_label.text = "Player"
 
 func _physics_process(delta: float) -> void:
 	var input_vector := Vector2.ZERO

@@ -1,10 +1,10 @@
 extends Control
 
-const SERVER_URL = "http://localhost:3000"
+const SERVER_URL = "https://dwtg.onrender.com"
 
-@onready var leaderboard_list = $ScrollContainer/LeaderboardList
-@onready var loading_label = $LoadingLabel
-@onready var back_button = $BackButton
+@onready var leaderboard_list = $VBoxContainer/ScrollContainer/LeaderboardList
+@onready var loading_label = $VBoxContainer/LoadingLabel
+@onready var back_button = $VBoxContainer/BackButton
 
 var http_request: HTTPRequest
 

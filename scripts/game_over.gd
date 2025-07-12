@@ -84,7 +84,7 @@ func submit_score_to_server(game_stats: Dictionary):
 	var json_string = JSON.stringify(data)
 	var headers = ["Content-Type: application/json"]
 	
-	http_request.request("http://localhost:3000/api/leaderboard", headers, HTTPClient.METHOD_POST, json_string)
+	http_request.request("https://dwtg.onrender.com/api/leaderboard", headers, HTTPClient.METHOD_POST, json_string)
 
 func _on_score_submitted(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
 	if response_code == 200:
